@@ -49,6 +49,13 @@ const userSchema = new mongoose.Schema({
   }]
 });
 
+// Connect user to task
+userSchema.virtual('tasks', {
+  ref: 'Task',
+  localField: '_id',
+  foreignField: 'owner'
+});
+
 // Hide private data / Expose Public data
 userSchema.methods.toJSON = function () {
   const user = this;
